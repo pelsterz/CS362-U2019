@@ -848,7 +848,7 @@ int tributeCard(int card, int choice1, int choice2, int choice3, struct gameStat
     tributeRevealedCards[1] = -1;
   }
 
-  for (i = 0; i <= 2; i--){
+  for (i = 0; i <= 1; i++){
     if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold){//Treasure cards
       state->coins -= 2;
     }
