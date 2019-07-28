@@ -667,7 +667,7 @@ int baronCard(int card, int choice1, int choice2, int choice3, struct gameState 
         }
         if (supplyCount(estate, state) > 0){
           gainCard(estate, state, 0, currentPlayer);
-          state->supplyCount[estate]++;//Increment estates
+          state->supplyCount[estate]--;//Decrement estates
           if (supplyCount(estate, state) == 0){
             isGameOver(state);
           }
@@ -680,7 +680,7 @@ int baronCard(int card, int choice1, int choice2, int choice3, struct gameState 
     }
   }
   else{
-    if (supplyCount(estate, state) < 0){
+    if (supplyCount(estate, state) > 0){
       gainCard(estate, state, 0, currentPlayer);//Gain an estate
       state->supplyCount[estate]--;//Decrement Estates
       if (supplyCount(estate, state) == 0){
@@ -712,13 +712,11 @@ int minionCard(int card, int choice1, int choice2, int choice3, struct gameState
       {
         discardCard(handPos, currentPlayer, state, 0);
       }
-
     //draw 4
     for (i = 0; i <= 4; i++)
       {
         drawCard(currentPlayer, state);
       }
-
     //other players discard hand and redraw if hand size > 4
     for (i = 0; i < state->numPlayers; i++)
     {
@@ -848,7 +846,7 @@ int tributeCard(int card, int choice1, int choice2, int choice3, struct gameStat
     tributeRevealedCards[1] = -1;
   }
 
-  for (i = 0; i <= 2; i--){
+  for (i = 0; i <= 2; i++){
     if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold){//Treasure cards
       state->coins -= 2;
     }
@@ -1251,13 +1249,13 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
   if (trashFlag < 1)
     {
       //add card to played pile
-      state->playedCards[state->playedCardCount] = state->hand[currentPlayer][handPos];
+      state->playedCards[state->playedCardCount];
+      state->hand[currentPlayer][handPos];
       state->playedCardCount++;
     }
 
   //set played card to -1
   state->hand[currentPlayer][handPos] = -1;
-
   //remove card from player's hand
   if ( handPos == (state->handCount[currentPlayer] - 1) ) 	//last card in hand array is played
     {
