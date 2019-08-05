@@ -10,7 +10,7 @@ BaseDominion_Source= dominion.c cardHelpers/cardEffect.o
 BaseDominion_Depend= $(BaseDominion_Headers) $(BaseDominion_Source) rngs.o
 
 
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS= -Wall -fpic -coverage -lm -std=c99 -ggdb
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -19,7 +19,7 @@ dominion.o: $(BaseDominion_Depend)
 	gcc -c $(BaseDominion_Source) -g  $(CFLAGS)
 
 cardEffect.o: cardHelpers/cardEffect.h
-	gcc -c cardHelpers/cardEffect.c -g $(CFLAGS)
+	gcc -c cardHelpers/cardEffect.c -g -ggdb $(CFLAGS)
 
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o cardEffect.o $(CFLAGS)
@@ -52,7 +52,7 @@ unittest2: unittest2.c dominion.o rngs.o cardHelpers/cardEffect.o
 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o cardHelpers/cardEffect.o $(CFLAGS)
 
 unittest3: unittest3.c dominion.o rngs.o cardHelpers/cardEffect.o
-	gcc -o unittest3 -g unittest3.c dominion.o rngs.o cardHelpers/cardEffect.o $(CFLAGS)
+	gcc -o unittest3 -g -ggdb unittest3.c dominion.o rngs.o cardHelpers/cardEffect.o $(CFLAGS)
 
 unittest4: unittest4.c dominion.o rngs.o cardHelpers/cardEffect.o
 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o cardHelpers/cardEffect.o $(CFLAGS)
